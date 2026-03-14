@@ -3,390 +3,1761 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORN Global Office Update</title>
+    <title>ORN Regional Office Update - Board Report</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: #f1f5f9;
-            min-height: 100vh;
-            color: #1e293b;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #1a1a1a;
+            line-height: 1.6;
         }
-
-        /* White Header for Logo */
+        
+        /* Header */
         .header {
             background: white;
-            padding: 25px 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            text-align: center;
+            border-bottom: 3px solid #1e3a5f;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
+        
         .logo-container {
-            height: 60px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .orn-logo {
+            height: 50px;
+            width: auto;
+        }
+        
+        .tripfactory-logo {
+            height: 30px;
+            width: auto;
+        }
+        
+        .report-title {
+            text-align: right;
+        }
+        
+        .report-title h1 {
+            font-size: 16pt;
+            color: #1e3a5f;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        
+        .report-title .subtitle {
+            font-size: 9pt;
+            color: #666;
+        }
+        
+        /* Tab Navigation */
+        .tab-container {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0 30px;
+            position: sticky;
+            top: 84px;
+            z-index: 99;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .tab-nav {
+            display: flex;
+            gap: 5px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            padding: 10px 0;
+        }
+        
+        .tab-nav::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .tab-nav::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .tab-nav::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 3px;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            border: none;
+            background: #edf2f7;
+            color: #4a5568;
+            font-size: 10pt;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px 6px 0 0;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab-btn:hover {
+            background: #e2e8f0;
+            color: #2d3748;
+        }
+        
+        .tab-btn.active {
+            background: #1e3a5f;
+            color: white;
+            border-bottom-color: #f6ad55;
+        }
+        
+        .tab-btn.pending {
+            background: #fffaf0;
+            color: #c05621;
+            border: 1px dashed #f6ad55;
+        }
+        
+        .tab-btn.pending:hover {
+            background: #feebc8;
+        }
+        
+        .flag {
+            font-size: 14px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #48bb78;
+        }
+        
+        .tab-btn.pending .status-dot {
+            background: #ed8936;
+        }
+        
+        /* Content Area */
+        .content-area {
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Summary Dashboard */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            text-align: center;
+            border-top: 4px solid #1e3a5f;
+        }
+        
+        .stat-number {
+            font-size: 36pt;
+            font-weight: 700;
+            color: #1e3a5f;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 10pt;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .response-rate {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            color: white;
+        }
+        
+        .response-rate .stat-number {
+            color: white;
+        }
+        
+        .response-rate .stat-label {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        /* Office Cards Grid */
+        .offices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .office-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid #1e3a5f;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .office-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+        
+        .office-card.pending {
+            border-left-color: #ed8936;
+            opacity: 0.7;
+        }
+        
+        .office-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .office-name {
+            font-size: 14pt;
+            font-weight: 700;
+            color: #1e3a5f;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .office-status {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 8pt;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .office-status.received {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        
+        .office-status.pending {
+            background: #feebc8;
+            color: #744210;
+        }
+        
+        .office-meta {
+            font-size: 9pt;
+            color: #718096;
+            margin-bottom: 10px;
+        }
+        
+        .office-manager {
+            font-size: 10pt;
+            color: #4a5568;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .key-points {
+            background: #f7fafc;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 9.5pt;
+        }
+        
+        .key-points h4 {
+            font-size: 9pt;
+            color: #1e3a5f;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .key-points ul {
+            margin-left: 15px;
+            color: #4a5568;
+        }
+        
+        .key-points li {
+            margin-bottom: 4px;
+        }
+        
+        /* Section Styling for Individual Office Pages */
+        .office-header-large {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .office-header-large h2 {
+            font-size: 24pt;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .office-location {
+            font-size: 12pt;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .submitted-by-box {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 4px solid #1e3a5f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .section-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .logo-container img {
-            max-height: 100%;
-            max-width: 200px;
-            object-fit: contain;
-        }
-
-        /* Fallback if logo doesn't load */
-        .logo-fallback {
-            font-size: 24px;
-            font-weight: 800;
-            color: #0f172a;
-            letter-spacing: -0.5px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        /* Intro Section */
-        .intro {
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
-            color: white;
-            padding: 35px 30px;
-        }
-
-        .intro h1 {
-            font-size: 24px;
-            margin-bottom: 12px;
-            font-weight: 700;
-        }
-
-        .intro p {
-            opacity: 0.9;
-            line-height: 1.6;
-            font-size: 15px;
-        }
-
-        .form-body {
-            padding: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
             font-size: 14px;
-            font-weight: 600;
-            color: #0f172a;
+            font-weight: bold;
+            color: white;
         }
-
-        .required {
-            color: #ef4444;
-            margin-left: 3px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 15px;
-            font-family: inherit;
-            transition: all 0.3s;
-            background: #fafafa;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #3b82f6;
-            background: white;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-        }
-
-        /* Unlimited Text Areas */
-        textarea {
-            width: 100%;
-            min-height: 120px;
-            padding: 16px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 15px;
-            font-family: inherit;
-            line-height: 1.6;
-            transition: all 0.3s;
-            background: #fafafa;
-            resize: vertical; /* User can drag to make bigger */
-            overflow: auto;
-            /* No max-height - unlimited expansion */
-        }
-
-        textarea:focus {
-            outline: none;
-            border-color: #3b82f6;
-            background: white;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-        }
-
-        /* Auto-expanding textareas */
-        .auto-expand {
-            field-sizing: content; /* Modern browsers - grows with content */
-            min-height: 120px;
-        }
-
-        /* Hint text */
-        .hint {
-            font-size: 12px;
-            color: #64748b;
-            margin-top: 6px;
-            font-style: italic;
-        }
-
-        .radio-group {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .radio-item {
-            flex: 1;
-            min-width: 100px;
-        }
-
-        .radio-item input {
-            display: none;
-        }
-
-        .radio-item label {
-            display: block;
-            padding: 14px;
-            text-align: center;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            cursor: pointer;
-            margin: 0;
-            transition: all 0.2s;
-            font-weight: 500;
-            background: #fafafa;
-        }
-
-        .radio-item input:checked + label {
-            border-color: #3b82f6;
-            background: #eff6ff;
-            color: #3b82f6;
-            font-weight: 600;
-        }
-
-        .section-title {
-            font-size: 13px;
+        
+        .section h3 {
+            font-size: 12pt;
+            color: #1e3a5f;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #3b82f6;
-            margin: 35px 0 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f1f5f9;
         }
-
-        button {
+        
+        .section-content {
+            font-size: 11pt;
+            line-height: 1.8;
+            color: #2d3748;
+        }
+        
+        .section-content ul {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+        
+        .section-content li {
+            margin-bottom: 8px;
+        }
+        
+        .challenges .section-icon { background: #e53e3e; }
+        .challenges h3 { color: #c53030; }
+        .challenges { border-left: 4px solid #e53e3e; }
+        
+        .performance .section-icon { background: #38a169; }
+        .performance h3 { color: #276749; }
+        .performance { border-left: 4px solid #38a169; }
+        
+        .plans .section-icon { background: #3182ce; }
+        .plans h3 { color: #2c5282; }
+        .plans { border-left: 4px solid #3182ce; }
+        
+        .business-type .section-icon { background: #805ad5; }
+        
+        /* Data Table */
+        .data-table {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+        
+        .data-table th {
+            background: #1e3a5f;
             color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 10px;
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
         }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3);
+        
+        .data-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e2e8f0;
         }
-
-        .footer {
+        
+        .data-table tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        /* Pending Office Message */
+        .pending-message {
             text-align: center;
-            padding: 20px;
-            color: #64748b;
-            font-size: 13px;
-            border-top: 1px solid #f1f5f9;
-            margin-top: 10px;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-
-        @media (max-width: 600px) {
-            .header {
-                padding: 20px;
-            }
-            
-            .intro {
-                padding: 25px 20px;
-            }
-            
-            .form-body {
-                padding: 25px 20px;
-            }
-            
-            textarea {
-                min-height: 100px;
-            }
+        
+        .pending-message h2 {
+            color: #1e3a5f;
+            margin-bottom: 15px;
+            font-size: 20pt;
+        }
+        
+        .pending-message p {
+            color: #718096;
+            font-size: 12pt;
+        }
+        
+        .pending-icon {
+            font-size: 48pt;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
-    <!-- White Header with Logo Space -->
-    <div class="header">
-        <div class="logo-container">
-            <!-- Add your orn-logo.png here -->
-            <img src="orn-logo.png" alt="ORN Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            
-            <!-- Fallback text if logo fails to load -->
-            <div class="logo-fallback" style="display: none;">ORN</div>
-        </div>
+<!-- Header -->
+<div class="header">
+    <div class="logo-container">
+        <img src="orn-logo.png" alt="ORN Logo" class="orn-logo">
+        <img src="tripfactory-logo.png" alt="TripFactory" class="tripfactory-logo">
     </div>
+    <div class="report-title">
+        <h1>Regional Office Update</h1>
+        <div class="subtitle">Board Meeting Report | March 2026</div>
+    </div>
+</div>
 
-    <div class="container">
-        <div class="card">
-            <!-- Intro Section -->
-            <div class="intro">
-                <h1>Global Office Quarterly Update</h1>
-                <p>Please provide a brief update on your office's performance and plans. This information helps headquarters coordinate global operations, allocate resources, and support your team's success in the upcoming quarters. All responses are confidential and shared only with senior management.</p>
+<!-- Tab Navigation -->
+<div class="tab-container">
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="showTab('summary')">
+            <span>📊</span> Summary
+        </button>
+        <button class="tab-btn" onclick="showTab('turkey')">
+            <span class="flag">🇹🇷</span> Turkey
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn" onclick="showTab('germany')">
+            <span class="flag">🇩🇪</span> Germany
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn" onclick="showTab('uae')">
+            <span class="flag">🇦🇪</span> UAE
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn" onclick="showTab('europe')">
+            <span class="flag">🇪🇺</span> Europe
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('greece')">
+            <span class="flag">🇬🇷</span> Greece
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('australia')">
+            <span class="flag">🇦🇺</span> Australia
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('indonesia')">
+            <span class="flag">🇮🇩</span> Indonesia
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('thailand')">
+            <span class="flag">🇹🇭</span> Thailand
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('argentina')">
+            <span class="flag">🇦🇷</span> Argentina
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('italy')">
+            <span class="flag">🇮🇹</span> Italy
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('malaysia')">
+            <span class="flag">🇲🇾</span> Malaysia
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('peru')">
+            <span class="flag">🇵🇪</span> Peru
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('uk')">
+            <span class="flag">🇬🇧</span> UK
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('bahrain')">
+            <span class="flag">🇧🇭</span> Bahrain
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('philippines')">
+            <span class="flag">🇵🇭</span> Philippines
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('france')">
+            <span class="flag">🇫🇷</span> France
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('poland')">
+            <span class="flag">🇵🇱</span> Poland
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('czech')">
+            <span class="flag">🇨🇿</span> Czech
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('singapore')">
+            <span class="flag">🇸🇬</span> Singapore
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('slovakia')">
+            <span class="flag">🇸🇰</span> Slovakia
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('bulgaria')">
+            <span class="flag">🇧🇬</span> Bulgaria
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('usa')">
+            <span class="flag">🇺🇸</span> USA
+            <span class="status-dot"></span>
+        </button>
+        <button class="tab-btn pending" onclick="showTab('india')">
+            <span class="flag">🇮🇳</span> India
+            <span class="status-dot"></span>
+        </button>
+    </div>
+</div>
+
+<!-- Content Area -->
+<div class="content-area">
+    
+    <!-- SUMMARY DASHBOARD -->
+    <div id="summary" class="tab-content active">
+        <div class="summary-grid">
+            <div class="stat-card response-rate">
+                <span class="stat-number">4/21</span>
+                <span class="stat-label">Response Rate</span>
             </div>
-
-            <div class="form-body">
-                <form action="https://formspree.io/f/xlgpdbjo" method="POST">
-                    
-                    <!-- Office Location -->
-                    <div class="form-group">
-                        <label for="location">Office Location <span class="required">*</span></label>
-                        <input type="text" id="location" name="Office Location" placeholder="e.g., London, Dubai, Mumbai, Delhi" required>
-                    </div>
-
-                    <!-- Your Name -->
-                    <div class="form-group">
-                        <label for="name">Your Name <span class="required">*</span></label>
-                        <input type="text" id="name" name="Submitted By" placeholder="e.g., Raj Kumar" required>
-                    </div>
-
-                    <!-- Business Type -->
-                    <div class="form-group">
-                        <label>Business Type <span class="required">*</span></label>
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" id="inbound" name="Business Type" value="Inbound" required>
-                                <label for="inbound">Inbound</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" id="outbound" name="Business Type" value="Outbound" required>
-                                <label for="outbound">Outbound</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" id="both" name="Business Type" value="Both" required>
-                                <label for="both">Both</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="section-title">Quarterly Review & Forward Planning</div>
-
-                    <!-- Q1 Performance - Unlimited Text -->
-                    <div class="form-group">
-                        <label for="q1">Q1 Jan - Mar 26 Performance Update (to date) <span class="required">*</span></label>
-                        <textarea 
-                            id="q1" 
-                            name="Q1 Performance" 
-                            class="auto-expand"
-                            placeholder="Summarise Q1 results to date in Q1 (Jan-Feb 26) , targets achieved, revenue performance, and key accomplishments... Type as much as you need, the box will expand."
-                            rows="5"
-                            required></textarea>
-                        <div class="hint">Drag the bottom-right corner to expand, or just keep typing - there's no limit</div>
-                    </div>
-
-                    <!-- Key Challenges - Unlimited Text -->
-                    <div class="form-group">
-                        <label for="challenges">Key Challenges <span class="required">*</span></label>
-                        <textarea 
-                            id="challenges" 
-                            name="Key Challenges" 
-                            class="auto-expand"
-                            placeholder="What obstacles is your office facing? (Resources, market conditions, competition, staffing, etc.) Type as much as you need, the box will expand."
-                            rows="5"
-                            required></textarea>
-                        <div class="hint">Drag the bottom-right corner to expand, or just keep typing - there's no limit</div>
-                    </div>
-
-                    <!-- Q2 Apr - Jun 26 Plans - Unlimited Text -->
-                    <div class="form-group">
-                        <label for="q2">Plans for Q2 <span class="required">*</span></label>
-                        <textarea 
-                            id="q2" 
-                            name="Q2 Plans" 
-                            class="auto-expand"
-                            placeholder="What are your main initiatives, targets, and focus areas for the next quarter? Type as much as you need, the box will expand."
-                            rows="5"
-                            required></textarea>
-                        <div class="hint">Drag the bottom-right corner to expand, or just keep typing - there's no limit</div>
-                    </div>
-
-                    <!-- Q3 Jul - Sep 26 Plans - Unlimited Text -->
-                    <div class="form-group">
-                        <label for="q3">Plans for Q3 <span class="required">*</span></label>
-                        <textarea 
-                            id="q3" 
-                            name="Q3 Plans" 
-                            class="auto-expand"
-                            placeholder="Outline your strategic goals, expansion plans, and pipeline for Q3... Type as much as you need, the box will expand."
-                            rows="5"
-                            required></textarea>
-                        <div class="hint">Drag the bottom-right corner to expand, or just keep typing - there's no limit</div>
-                    </div>
-
-                    <input type="hidden" name="_subject" value="ORN Global Office Update - New Submission">
-                    <input type="hidden" name="_next" value="https://tripfactory-ajay.github.io/thank-you.html">
-
-                    <button type="submit">Submit Office Update</button>
-                </form>
-
-                <div class="footer">
-                    <p>ORN Global Operations Team</p>
+            <div class="stat-card">
+                <span class="stat-number">19%</span>
+                <span class="stat-label">Offices Reported</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">5</span>
+                <span class="stat-label">Countries</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">6</span>
+                <span class="stat-label">Contributors</span>
+            </div>
+        </div>
+        
+        <h2 style="font-size: 16pt; color: #1e3a5f; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;">
+            Office Updates Overview
+        </h2>
+        
+        <div class="offices-grid">
+            <!-- Turkey -->
+            <div class="office-card" onclick="showTab('turkey')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇹🇷</span> Turkey</div>
+                    <span class="office-status received">Received</span>
+                </div>
+                <div class="office-meta">📍 Istanbul · Europe · Tier 1</div>
+                <div class="office-manager">👤 Barış İntepe</div>
+                <div class="key-points">
+                    <h4>Key Points</h4>
+                    <ul>
+                        <li>Strategy stability concerns</li>
+                        <li>Turkish website needed</li>
+                        <li>Q1 delivered but needs improvement</li>
+                        <li>Plans: India-Turkey incoming, OTA launch</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Germany -->
+            <div class="office-card" onclick="showTab('germany')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇩🇪</span> Germany</div>
+                    <span class="office-status received">Received</span>
+                </div>
+                <div class="office-meta">📍 Frankfurt · Europe · Tier 1</div>
+                <div class="office-manager">👤 Moaz Ghani</div>
+                <div class="key-points">
+                    <h4>Key Points</h4>
+                    <ul>
+                        <li>Operating licenses pending</li>
+                        <li>Vehicle re-registration blocker</li>
+                        <li>Q1 limited operations via Viator</li>
+                        <li>Q3: Welcome Pickups partnership</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- UAE -->
+            <div class="office-card" onclick="showTab('uae')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇦🇪</span> UAE</div>
+                    <span class="office-status received">Received</span>
+                </div>
+                <div class="office-meta">📍 Dubai · Middle East · Tier 1</div>
+                <div class="office-manager">👤 Yassir Ahmed</div>
+                <div class="key-points">
+                    <h4>Key Points</h4>
+                    <ul>
+                        <li>8 major challenges identified</li>
+                        <li>Strong inbound numbers (AED 6.4M)</li>
+                        <li>Q2: GDS integration, payment gateway</li>
+                        <li>Umrah program launch July 2026</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Europe Team -->
+            <div class="office-card" onclick="showTab('europe')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇪🇺</span> Europe Team</div>
+                    <span class="office-status received">Received</span>
+                </div>
+                <div class="office-meta">📍 Poland, France, Czech · Europe · Tier 1</div>
+                <div class="office-manager">👤 Paolina, Chris, Marta, Renaud</div>
+                <div class="key-points">
+                    <h4>Key Points</h4>
+                    <ul>
+                        <li>API integration delays</li>
+                        <li>90+ contracts signed</li>
+                        <li>Europe DMC structure priority</li>
+                        <li>Legal entity needed for France</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Pending Offices -->
+            <div class="office-card pending" onclick="showTab('greece')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇬🇷</span> Greece</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Athens · Europe · Tier 1</div>
+                <div class="office-manager">👤 Argiris (1 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('australia')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇦🇺</span> Australia</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Oceania · Tier 2</div>
+                <div class="office-manager">👤 Sahil Nijhawan (23 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('indonesia')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇮🇩</span> Indonesia</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Bali · Asia Pacific · Tier 1</div>
+                <div class="office-manager">👤 Sachin Kurte (8 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('thailand')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇹🇭</span> Thailand</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Bangkok · Asia Pacific · Tier 1</div>
+                <div class="office-manager">👤 Maricar Manalo Chao (7 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('argentina')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇦🇷</span> Argentina</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Buenos Aires · Americas · Tier 2</div>
+                <div class="office-manager">👤 Maria Noelia Bonvin (6 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('italy')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇮🇹</span> Italy</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Europe · Tier 1</div>
+                <div class="office-manager">👤 Daniele (6 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('malaysia')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇲🇾</span> Malaysia</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Kuala Lumpur · Asia Pacific · Tier 1</div>
+                <div class="office-manager">👤 Noor Adilah (1 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('peru')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇵🇪</span> Peru</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Lima · Americas · Tier 2</div>
+                <div class="office-manager">👤 Daniel Rodrigue (30 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('uk')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇬🇧</span> United Kingdom</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 London · Europe · Tier 1</div>
+                <div class="office-manager">👤 Raj Kumar, Ajay Kawa, Alia Taub (4 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('bahrain')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇧🇭</span> Bahrain</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Manama · Middle East · Tier 1</div>
+                <div class="office-manager">👤 KK Menon (1 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('philippines')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇵🇭</span> Philippines</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Manila · Asia Pacific · Tier 1</div>
+                <div class="office-manager">👤 Maricar Manalo Chao (17 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('france')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇫🇷</span> France</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Paris · Europe · Tier 1</div>
+                <div class="office-manager">👤 Paolina Zunino & Renaud Lenne (5 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('poland')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇵🇱</span> Poland</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Europe · Tier 1</div>
+                <div class="office-manager">👤 Krzysztof Jamruszkiewicz (1 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('czech')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇨🇿</span> Czech Republic</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Prague · Europe · Tier 1</div>
+                <div class="office-manager">👤 Marta Zizkova (1 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('singapore')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇸🇬</span> Singapore</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Asia Pacific · Tier 1</div>
+                <div class="office-manager">👤 Maricar Manalo Chao (3 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('slovakia')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇸🇰</span> Slovakia</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Europe · Tier 1</div>
+                <div class="office-manager">👤 Adonis (1 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('bulgaria')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇧🇬</span> Bulgaria</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Sofia · Europe · Tier 1</div>
+                <div class="office-manager">👤 Adonis</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('usa')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇺🇸</span> USA</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 Americas</div>
+                <div class="office-manager">👤 TBD</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                </div>
+            </div>
+            
+            <div class="office-card pending" onclick="showTab('india')">
+                <div class="office-card-header">
+                    <div class="office-name"><span class="flag">🇮🇳</span> India HQ</div>
+                    <span class="office-status pending">Pending</span>
+                </div>
+                <div class="office-meta">📍 South Asia · Tier 1</div>
+                <div class="office-manager">👤 Lalitha P (698 staff)</div>
+                <div class="key-points">
+                    <h4>Status</h4>
+                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        // Auto-expand textareas as user types
-        const textareas = document.querySelectorAll('.auto-expand');
+    
+    <!-- TURKEY OFFICE -->
+    <div id="turkey" class="tab-content">
+        <div class="office-header-large">
+            <h2><span class="flag">🇹🇷</span> Turkey Office</h2>
+            <div class="office-location">📍 Istanbul, Turkey · Europe Region · Tier 1</div>
+        </div>
         
-        textareas.forEach(textarea => {
-            textarea.addEventListener('input', function() {
-                // Reset height to auto to get the correct scrollHeight
-                this.style.height = 'auto';
-                // Set the height to match the content
-                this.style.height = this.scrollHeight + 'px';
-            });
-            
-            // Trigger once on load to set initial height
-            textarea.dispatchEvent(new Event('input'));
+        <div class="submitted-by-box">
+            <div><strong>Submitted By:</strong> Barış İntepe</div>
+            <div style="color: #718096; font-size: 10pt;">March 2026</div>
+        </div>
+        
+        <div class="section business-type">
+            <div class="section-header">
+                <div class="section-icon">BT</div>
+                <h3>Business Type</h3>
+            </div>
+            <div class="section-content">
+                Both inbound and outbound
+            </div>
+        </div>
+        
+        <div class="section challenges">
+            <div class="section-header">
+                <div class="section-icon">⚠</div>
+                <h3>Key Challenges</h3>
+            </div>
+            <div class="section-content">
+                There are several key challenges. One of the main issues is the frequent changes in decisions and strategy. If our goal is to become an OTA in the Turkish market, we need a clear and stable direction. For example, we have been requesting a Turkish-language website for quite some time, which we believe is essential for this market. A clear plan should be defined and followed consistently without frequent changes. I would be happy to explain these points in more detail during a Zoom meeting.
+            </div>
+        </div>
+        
+        <div class="section performance">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <h3>Q1 Performance</h3>
+            </div>
+            <div class="section-content">
+                We delivered on our plans during Q1, but the results still need to improve.
+            </div>
+        </div>
+        
+        <div class="section plans">
+            <div class="section-header">
+                <div class="section-icon">🎯</div>
+                <h3>Q2 Plans</h3>
+            </div>
+            <div class="section-content">
+                Starting India - to Turkey Incoming.. and sell Bali, Thailand Dubai to Tour Operators in Turkey
+            </div>
+        </div>
+        
+        <div class="section plans">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <h3>Q3 Plans</h3>
+            </div>
+            <div class="section-content">
+                Starting Inbound from GSS-to Turkey, Opening OTA
+            </div>
+        </div>
+    </div>
+    
+    <!-- GERMANY OFFICE -->
+    <div id="germany" class="tab-content">
+        <div class="office-header-large">
+            <h2><span class="flag">🇩🇪</span> Germany Office</h2>
+            <div class="office-location">📍 Frankfurt am Main, Germany · Europe Region · Tier 1</div>
+        </div>
+        
+        <div class="submitted-by-box">
+            <div><strong>Submitted By:</strong> Moaz Ghani</div>
+            <div style="color: #718096; font-size: 10pt;">March 9, 2026</div>
+        </div>
+        
+        <div class="section business-type">
+            <div class="section-header">
+                <div class="section-icon">BT</div>
+                <h3>Business Type</h3>
+            </div>
+            <div class="section-content">
+                Both inbound and outbound
+            </div>
+        </div>
+        
+        <div class="section challenges">
+            <div class="section-header">
+                <div class="section-icon">⚠</div>
+                <h3>Key Challenges</h3>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 10px;">The biggest challenge for our office is the missing operating licences in Germany. Without these licences we cannot:</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Work with many local partners</li>
+                    <li>Cooperate with hotels and travel agencies</li>
+                    <li>Participate in larger contracts</li>
+                    <li>Prove legally that we can operate locally</li>
+                </ul>
+                <p style="margin-bottom: 10px;">This problem is not related to the German authorities. The main step required is the vehicle re-registration process, which needs internal approvals and coordination. Until this is completed, the licences cannot be issued.</p>
+                <p style="margin-bottom: 10px;">Another challenge is that because of this situation it is difficult to grow the team or hire more drivers, since we first need stable operations and confirmed demand.</p>
+                <p style="margin-bottom: 10px;">Additionally, I would also suggest that it would be very helpful if we could organise a meeting with all European managers. This would allow us to know each other better, share experiences from different markets and discuss problems together in order to find solutions more efficiently.</p>
+                <p>I would also like to request a separate meeting regarding the ORNBUS.com website, because currently it is not very easy to use for partners or customers. Many important features are missing and improvements would help increase bookings and usability.</p>
+            </div>
+        </div>
+        
+        <div class="section performance">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <h3>Q1 Performance</h3>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 10px;">In Q1 (Jan-Feb 2026) our operations in Germany were limited because we still did not receive the required licences for operating locally. Because of this situation we could not expand the local business as planned.</p>
+                <p style="margin-bottom: 10px;">Many partners, hotels and agencies in Germany ask first to see the official licences before they cooperate with us, and at the moment we cannot show them. This issue is not because of the German authorities or because of my side. The main requirement is that the vehicles must be re-registered and transferred correctly so the licences can be issued.</p>
+                <p style="margin-bottom: 10px;">This topic was already discussed several times with Adonis and he is trying his best to solve this situation. However, until now we did not receive a final confirmation from India which is required to proceed.</p>
+                <p>Because of this limitation, at the moment we mainly operate tours which come from Viator and also some private clients which I built up earlier. These bookings help us to keep some activity running, but the potential of the German market is much bigger if we can operate fully with the licences.</p>
+            </div>
+        </div>
+        
+        <div class="section plans">
+            <div class="section-header">
+                <div class="section-icon">🎯</div>
+                <h3>Q2 Plans</h3>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 10px;">The main priority for Q2 is to receive the operating licences as soon as possible. Once the licences are available, we will immediately focus on expanding the business in Germany. The main initiatives will be:</p>
+                <ul style="margin-left: 20px;">
+                    <li>Building partnerships with hotels</li>
+                    <li>Collaborating with schools and educational travel groups</li>
+                    <li>Working with multiple online platforms and travel marketplaces</li>
+                    <li>Expanding our local B2B network</li>
+                    <li>Hiring reliable and professional drivers</li>
+                    <li>Increasing the number of vehicles if demand grows</li>
+                </ul>
+                <p style="margin-top: 10px;">Germany, especially Frankfurt, has strong demand for transfers, tours and group transport. With the correct licences we can grow the business much faster.</p>
+            </div>
+        </div>
+        
+        <div class="section plans">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <h3>Q3 Plans</h3>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 10px;">For Q3 one of the main strategic goals is to expand cooperation with larger international platforms. I am planning to set up a meeting with the company Welcome Pickups, which is already a large transfer platform working with many drivers in Frankfurt.</p>
+                <p style="margin-bottom: 10px;">At the moment they cooperate with multiple independent drivers and partners. The idea would be to discuss a stronger partnership where we could potentially handle a large portion or even all of their Frankfurt operations.</p>
+                <p>If this collaboration works out successfully, it could bring a significant number of bookings and require us to expand our fleet with additional vans and drivers. This could become a major growth opportunity for our operations in Germany and help establish a stronger presence in the European transfer market.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- UAE OFFICE -->
+    <div id="uae" class="tab-content">
+        <div class="office-header-large">
+            <h2><span class="flag">🇦🇪</span> UAE Office</h2>
+            <div class="office-location">📍 Dubai, UAE · Middle East Region · Tier 1</div>
+        </div>
+        
+        <div class="submitted-by-box">
+            <div><strong>Submitted By:</strong> Yassir Ahmed</div>
+            <div style="color: #718096; font-size: 10pt;">March 9, 2026</div>
+        </div>
+        
+        <div class="section business-type">
+            <div class="section-header">
+                <div class="section-icon">BT</div>
+                <h3>Business Type</h3>
+            </div>
+            <div class="section-content">
+                Both inbound and outbound
+            </div>
+        </div>
+        
+        <div class="section challenges">
+            <div class="section-header">
+                <div class="section-icon">⚠</div>
+                <h3>Key Challenges</h3>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 10px;"><strong>1. No Airline Content GCC (LCC & GDS) for Outbound</strong> - We need a global AIR contracting team</p>
+                <p style="margin-bottom: 10px;"><strong>2. No Local Payment Infrastructure</strong> (UAE & KSA)</p>
+                <p style="margin-bottom: 10px;"><strong>3. No Tourism Board Partnerships</strong> (Global)</p>
+                <p style="margin-bottom: 10px;"><strong>4. No Brand Awareness & Marketing for GCC</strong> (Global)</p>
+                <p style="margin-bottom: 10px;"><strong>5. Sales & Distribution Challenges Inbound</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Only one source market, India</li>
+                    <li>No dedicated MICE team from source markets</li>
+                    <li>No Dedicated RM (Relationship managers based in BLR)</li>
+                </ul>
+                <p style="margin-bottom: 10px;"><strong>Challenges Outbound</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>No team to build a large agent network in GCC</li>
+                    <li>Pricing issue GCC -- Majorly high markup</li>
+                    <li>No road shows or agents' engagement activities in GCC</li>
+                    <li>No Dedicated RM (Relationship managers based in BLR)</li>
+                </ul>
+                <p style="margin-bottom: 10px;"><strong>Impact:</strong> Slow market penetration.</p>
+                <p style="margin-bottom: 10px;"><strong>6. Operations & Customer Service Challenges</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>No Visa processing locally for outbound</li>
+                    <li>No Supplier relationships management locally for Inbound and Outbound</li>
+                </ul>
+                <p style="margin-bottom: 10px;"><strong>7. Product Supply Challenges Inbound</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>No Contracting or competitive hotel rates -- Inbound (Except India)</li>
+                    <li>No Product for other source markets except India</li>
+                </ul>
+                <p style="margin-bottom: 10px;"><strong>Challenges Outbound</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>No products designed for GCC markets</li>
+                    <li>Same DMC or suppliers used for India and GCC Markets</li>
+                </ul>
+                <p style="margin-bottom: 10px;"><strong>Impact:</strong> Product inconsistency across markets.</p>
+                <p style="margin-bottom: 10px;"><strong>8. Cruise & Insurance Challenges</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>No Cruise content partnerships</li>
+                    <li>No Insurance integration via API</li>
+                </ul>
+                <p><strong>Impact:</strong> Missing ancillary revenue streams.</p>
+            </div>
+        </div>
+        
+        <div class="section performance">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <h3>Q1 Performance</h3>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 15px;">Middle East - Inbound and Outbound. Inbound sales have been generated by the India team and are completely managed by them, and outbound sales are managed by Mr. Sachin Nene, who has done a good job so far with the limited resources.</p>
+                
+                <p style="margin-bottom: 10px; font-weight: 600; color: #1e3a5f;">Outbound Sales:</p>
+                <table class="data-table" style="margin-bottom: 15px;">
+                    <thead>
+                        <tr>
+                            <th>Agents</th>
+                            <th>Month</th>
+                            <th>Sales (AED)</th>
+                            <th>No. of Pax</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>27</td>
+                            <td>Nov</td>
+                            <td>674,171</td>
+                            <td>404</td>
+                        </tr>
+                        <tr>
+                            <td>26</td>
+                            <td>Dec</td>
+                            <td>391,455</td>
+                            <td>214</td>
+                        </tr>
+                        <tr>
+                            <td>20</td>
+                            <td>Jan</td>
+                            <td>744,947</td>
+                            <td>279</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p style="margin-bottom: 10px; font-weight: 600; color: #1e3a5f;">Inbound Sales:</p>
+                <table class="data-table" style="margin-bottom: 15px;">
+                    <thead>
+                        <tr>
+                            <th>Agents</th>
+                            <th>Month</th>
+                            <th>Sales (AED)</th>
+                            <th>No. of Pax</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>220</td>
+                            <td>Nov</td>
+                            <td>2,247,814</td>
+                            <td>1,104</td>
+                        </tr>
+                        <tr>
+                            <td>213</td>
+                            <td>Dec</td>
+                            <td>2,203,893</td>
+                            <td>1,123</td>
+                        </tr>
+                        <tr>
+                            <td>213</td>
+                            <td>Jan</td>
+                            <td>2,026,985</td>
+                            <td>1,115</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div style="background: #fffaf0; border: 1px solid #fbd38d; border-radius: 6px; padding: 15px; margin: 15px 0;">
+                    <p style="margin-bottom: 10px; font-weight: 600; color: #c05621;">Strategic Philosophy:</p>
+                    <p>Travel is fundamentally a product business, not just a sales business. Success depends on:</p>
+                    <ul style="margin-left: 20px; margin-top: 8px;">
+                        <li>Strong destination contracting</li>
+                        <li>Competitive air + land packaging</li>
+                        <li>Market-specific product design</li>
+                        <li>Reliable post-sale operations and profiling the customers</li>
+                    </ul>
+                    <p style="margin-top: 10px;">Therefore, both inbound and outbound will operate with dedicated product teams responsible for revenue generation in their respective markets, supported by centralized support in required areas.</p>
+                </div>
+                
+                <p style="margin-top: 15px;"><strong>Core Idea:</strong> Instead of every DMC building its own sales network, we create <strong>ONE Global Sales Team</strong>. This team sells: UAE DMC, Saudi DMC, Oman DMC, Turkey DMC, Europe DMC - All through one platform (Nexus DMC). Our Destination Management Company (DMC) operates on an asset-light model. We prioritize quality, products, robust contracts, and strategic relationships, all of which are supported by our core technology.</p>
+            </div>
+        </div>
+        
+        <div class="section plans">
+            <div class="section-header">
+                <div class="section-icon">🎯</div>
+                <h3>Q2 Execution Plan (April - June 2026)</h3>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 10px; font-weight: 600;">1. Infrastructure Setup</p>
+                <p style="margin-bottom: 5px;"><strong>Technology:</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Integrate GDS -- GCC suppliers</li>
+                    <li>Connect LCC airlines</li>
+                    <li>Implement destination management system integration</li>
+                </ul>
+                <p style="margin-bottom: 5px;"><strong>Payments:</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Launch the UAE/KSA payment gateway</li>
+                    <li>Integrate Tabby & Tamara installment options</li>
+                </ul>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">2. Product Launch - Outbound Packages</p>
+                <p style="margin-bottom: 5px;">Three-tier product architecture:</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li><strong>Entry:</strong> Flight + Hotel + Transfers</li>
+                    <li><strong>Mid:</strong> Flight + Hotel + Meals + Attractions</li>
+                    <li><strong>Luxury:</strong> Fully customized travel</li>
+                </ul>
+                <p style="margin-bottom: 5px;">Destinations - Launch packages for:</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Europe, CIS, Turkey, Southeast Asia, Japan, USA</li>
+                </ul>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">3. Sales Network Development</p>
+                <p style="margin-bottom: 5px;"><strong>UAE:</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Hire 5 sales executives</li>
+                    <li>Build 3000+ agent network</li>
+                </ul>
+                <p style="margin-bottom: 5px;"><strong>KSA:</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Appoint GSA / Distributor</li>
+                    <li>Hire Sales Manager + team</li>
+                </ul>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">4. Brand & Marketing Launch</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Appoint GCC marketing agency</li>
+                    <li>Launch digital campaigns: Google, Meta</li>
+                    <li>Begin agent education roadshows</li>
+                </ul>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">5. Inbound DMC Setup (UAE) - Except INDIA</p>
+                <p style="margin-bottom: 5px;">Team onboarding:</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Product Head, SME Inbound, Transport & Attractions team</li>
+                    <li>Hotel contracting, BLR operations team / SEA Operations team in the UAE</li>
+                </ul>
+                <p style="margin-bottom: 5px;">Focus markets:</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Southeast Asia, Europe/Turkey, CIS, Africa</li>
+                </ul>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">6. Umrah Program Launch</p>
+                <p style="margin-bottom: 5px;"><strong>Target launch:</strong> Post-Hajj July 2026</p>
+                <p style="margin-bottom: 5px;"><strong>Source markets:</strong> India, Turkey, Indonesia</p>
+                <p style="margin-bottom: 5px;"><strong>Operations setup:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li>Contracting and Ground handling teams in Mecca & Medina for all three markets</li>
+                    <li>Dedicated BLR operations support - Air/Visa/Hotels for India only</li>
+                    <li>Dedicated team in Turkey operations support - Air/Visa/Hotels for Turkey only</li>
+                    <li>Dedicated team in UAE or KSA operations support - Air/Visa/Hotels for Indonesia/Malaysia only</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section plans">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <h3>Q3 Execution Plan (July - September 2026)</h3>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 10px; font-weight: 600;">1. Scale Sales & Distribution</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Expand agent network to 10,000+ in KSA</li>
+                    <li>Conduct roadshows in Riyadh, Jeddah, Dammam</li>
+                    <li>Sign corporate travel partnerships</li>
+                </ul>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">2. Tourism Board Engagement</p>
+                <p style="margin-bottom: 5px;">Register and build partnerships with:</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Dubai Tourism, Saudi Tourism Authority, Oman Tourism, European tourism boards</li>
+                </ul>
+                <p style="margin-bottom: 10px;">Focus on co-op marketing campaigns to reduce roadshow marketing costs by 50%.</p>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">3. Hotel & Inventory Expansion</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Contract hotels in the UAE</li>
+                    <li>Lease Umrah hotels in Mecca & Medina</li>
+                    <li>Expand API connections with bedbanks</li>
+                </ul>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">4. QR Hotel Initiative (Dubai or London)</p>
+                <p style="margin-bottom: 5px;">Launch a QR travel booking platform in hotels.</p>
+                <p style="margin-bottom: 5px;"><strong>Benefits:</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Direct B2C acquisition</li>
+                    <li>Ancillary sales for tours & attractions</li>
+                    <li>Revenue share with hotels</li>
+                </ul>
+                <p style="margin-bottom: 5px;"><strong>Market opportunity:</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>831 hotels</li>
+                    <li>153,000+ rooms</li>
+                </ul>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">Strategic Growth Drivers</p>
+                <p style="margin-bottom: 5px;"><strong>1. Global Sales Team Objectives:</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Expand Nexus DMC global network</li>
+                    <li>Increase inbound traffic to the Middle East & Europe</li>
+                    <li>Develop new source markets</li>
+                </ul>
+                <p style="margin-bottom: 5px;"><strong>Target regions:</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Europe & UK, CIS, Southeast Asia, Africa</li>
+                </ul>
+                
+                <p style="margin-bottom: 5px;"><strong>2. GCC Hub Strategy</strong></p>
+                <p>UAE will act as:</p>
+                <ul style="margin-left: 20px;">
+                    <li>Regional operations hub</li>
+                    <li>Sales headquarters</li>
+                    <li>Product development center for GCC / CIS / AFRICA</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- EUROPE TEAM OFFICE -->
+    <div id="europe" class="tab-content">
+        <div class="office-header-large">
+            <h2><span class="flag">🇪🇺</span> Europe Team</h2>
+            <div class="office-location">📍 Poland, France, Czech Republic · Europe Region · Tier 1</div>
+        </div>
+        
+        <div class="submitted-by-box">
+            <div><strong>Submitted By:</strong> Paolina Zunino, Chris Jamruszkiewicz, Marta Zizkova, Renaud Lenne</div>
+            <div style="color: #718096; font-size: 10pt;">March 2026</div>
+        </div>
+        
+        <div class="section business-type">
+            <div class="section-header">
+                <div class="section-icon">BT</div>
+                <h3>Business Type</h3>
+            </div>
+            <div class="section-content">
+                Both inbound and outbound
+            </div>
+        </div>
+        
+        <div class="section challenges">
+            <div class="section-header">
+                <div class="section-icon">⚠</div>
+                <h3>Key Challenges</h3>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 10px; font-weight: 600;">1. Production</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Slow progress in API integrations with major channel managers (Bokun, FareHarbor, TourCMS)</li>
+                    <li>Limited number of contracted products currently visible on the Nexus platform</li>
+                    <li>Lack of updates regarding integrations with Ventrata and Rezdy</li>
+                    <li>Delays in API connections with strategic suppliers (Rail Europe, Europcar, Direct Ferries, Elife)</li>
+                </ul>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">2. Contracting</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Growing impatience among partners contracted in late 2025 due to limited product activation and lack of sales</li>
+                    <li>Missing solution for suppliers not using channel managers or API integrations (manual upload?)</li>
+                </ul>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">3. Operations</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>High reliance on custom inclusions, often referencing external platforms such as Project Expedition or Musement</li>
+                    <li>Some products on the platform do not yet meet premium standards expected by US travelers</li>
+                    <li>Complex internal approval processes (KYC, margin approvals, multicomponent confirmations)</li>
+                    <li>Lack of payment autonomy for the EU team (no dedicated operational credit card) - Important also for handling of crisis/emergency situations</li>
+                </ul>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">4. Sales</p>
+                <p>Need for a clear European commercial structure, including legal setup, licensing and staffing.</p>
+            </div>
+        </div>
+        
+        <div class="section performance">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <h3>Q1 Performance</h3>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 10px; font-weight: 600;">1. Production</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Development of new FIT products from scratch for the US market</li>
+                    <li>Expansion of the product portfolio for additional source markets</li>
+                    <li>Active sourcing of daily tour operators and premium transfer providers</li>
+                    <li>Establishment of cooperation with local DMCs to strengthen tailor-made capabilities and destination expertise</li>
+                </ul>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">2. Contracting</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Intensive partner outreach through daily meetings and participation in ITB Berlin</li>
+                    <li>90+ contracts signed with local operators and DMCs</li>
+                    <li>3,000+ contracted products (mostly through API channel managers)</li>
+                </ul>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">3. Operations</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Daily operational support for travel advisors from the USA and Australia in cooperation with the Melbourne office</li>
+                    <li>Continuous handling of bookings (activities and transfers), payment monitoring and quality checks for upcoming services</li>
+                </ul>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">4. Delivery</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Direct on-site support for end customers including handling of emergencies and last-minute requests</li>
+                </ul>
+                
+                <div style="background: #fffaf0; border: 1px solid #fbd38d; border-radius: 6px; padding: 12px; margin-top: 10px;">
+                    <p><strong>Note:</strong> For Production/Contracting/Operations and delivery - Proposal of a Nexus Europe DMC development strategy shared with Raj (currently awaiting feedback).</p>
+                </div>
+                
+                <p style="margin-bottom: 10px; font-weight: 600; margin-top: 15px;">5. Sales</p>
+                <ul style="margin-left: 20px;">
+                    <li>Preparation of a Global Sales Europe strategy (awaiting board feedback)</li>
+                    <li>Limited activity in France due to legal constraints (absence of legal entity and required licenses)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section plans">
+            <div class="section-header">
+                <div class="section-icon">🎯</div>
+                <h3>Q2 Plans</h3>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 10px; font-weight: 600;">1. Establishment of a Europe DMC Structure (Key Priority)</p>
+                <p style="margin-bottom: 10px;">The main strategic objective for Q2-Q3 is the development of a dedicated Europe DMC structure. Creating a centralized Europe DMC would significantly improve operational efficiency and support the long-term development of Nexus in the region (both FIT and group business).</p>
+                <p style="margin-bottom: 10px;"><strong>Key benefits include:</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Faster and more efficient production and contracting, including the expansion of hotel partnerships across Europe</li>
+                    <li>Strengthening local expertise and on-the-ground presence, improving service quality and responsiveness</li>
+                    <li>Greater efficiency in operations and delivery, particularly in handling last-minute requests and managing on-site situations</li>
+                    <li>Centralization of key functions within Europe, reducing reliance on other regional teams</li>
+                    <li>A Europe-based structure would allow the EU team to manage the majority of tasks locally, avoiding the need to involve other offices for European business (e.g., Australia for proposal preparation or India for product loading)</li>
+                </ul>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">2. Product Development and Contracting</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Accelerate the expansion of the European product portfolio (products designed for all source markets)</li>
+                    <li>Direct contracting of hotel chains and individual properties according to requirement of all Nexus source markets</li>
+                    <li>Continue contracting local operators, DMCs, and premium suppliers across key destinations</li>
+                    <li>Ensure that contracted products are progressively made available on the Nexus platform through API integrations or alternative interim solutions</li>
+                    <li>Ensure presence of Nexus DMC in Europe (participation in main tourism events in Europe - WTM London, TopResa Paris, Fitur Madrid + some local if possible)</li>
+                </ul>
+                
+                <p style="margin-bottom: 10px; font-weight: 600;">3. Operations and Delivery</p>
+                <p style="margin-bottom: 10px;">For Q2-Q3, the operational focus should shift toward:</p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Efficient handling of confirmed bookings and service delivery</li>
+                    <li>Maximization of sales of products (tours, transfers, and hotels) directly contracted with local partners</li>
+                </ul>
+                <p style="margin-bottom: 10px;"><strong>Key priorities include:</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 10px;">
+                    <li>Managing the increasing volume of confirmed bookings from the US and Australian markets</li>
+                    <li>Ensuring high-quality on-the-ground support for travelers, including assistance with emergencies and last-minute operational requests</li>
+                    <li>Strengthening cooperation with local partners and suppliers to ensure seamless service delivery</li>
+                    <li>Developing more structured quality monitoring and supplier management processes</li>
+                </ul>
+                <p>A stronger European operational base will ensure faster response times and a higher level of service for end customers.</p>
+            </div>
+        </div>
+        
+        <div class="section plans">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <h3>Q3 Plans</h3>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 10px;">Alongside the development of the Nexus DMC Europe structure, and following the initial groundwork established for inbound operations, the next step will be to focus on the development of outbound activities.</p>
+                <p style="margin-bottom: 10px;">The details of this initiative are outlined in the Sales Strategy document prepared by Paolina Zunino.</p>
+                <p style="margin-bottom: 10px;">During the first phase of building the outbound structure, the focus should be placed on selected European source markets (e.g., the United Kingdom, Germany, and France).</p>
+                <p>The sales network should then be gradually expanded by progressively strengthening the sales team, adding new members responsible for sales development in additional destinations.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- PENDING OFFICES -->
+    <div id="greece" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇬🇷</div>
+            <h2>Greece Office</h2>
+            <p><strong>Location:</strong> Athens, Europe | <strong>Tier:</strong> 1 | <strong>Manager:</strong> Argiris</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 1</p>
+        </div>
+    </div>
+    
+    <div id="australia" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇦🇺</div>
+            <h2>Australia Office</h2>
+            <p><strong>Location:</strong> Oceania | <strong>Tier:</strong> 2 | <strong>Manager:</strong> Sahil Nijhawan</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 23</p>
+        </div>
+    </div>
+    
+    <div id="indonesia" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇮🇩</div>
+            <h2>Indonesia Office</h2>
+            <p><strong>Location:</strong> Bali, Asia Pacific | <strong>Tier:</strong> 1 | <strong>Manager:</strong> Sachin Kurte</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 8</p>
+        </div>
+    </div>
+    
+    <div id="thailand" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇹🇭</div>
+            <h2>Thailand Office</h2>
+            <p><strong>Location:</strong> Bangkok, Asia Pacific | <strong>Tier:</strong> 1 | <strong>Manager:</strong> Maricar Manalo Chao</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 7</p>
+        </div>
+    </div>
+    
+    <div id="argentina" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇦🇷</div>
+            <h2>Argentina Office</h2>
+            <p><strong>Location:</strong> Buenos Aires, Americas | <strong>Tier:</strong> 2 | <strong>Manager:</strong> Maria Noelia Bonvin</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 6</p>
+        </div>
+    </div>
+    
+    <div id="italy" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇮🇹</div>
+            <h2>Italy Office</h2>
+            <p><strong>Location:</strong> Europe | <strong>Tier:</strong> 1 | <strong>Manager:</strong> Daniele</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 6</p>
+        </div>
+    </div>
+    
+    <div id="malaysia" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇲🇾</div>
+            <h2>Malaysia Office</h2>
+            <p><strong>Location:</strong> Kuala Lumpur, Asia Pacific | <strong>Tier:</strong> 1 | <strong>Manager:</strong> Noor Adilah</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 1</p>
+        </div>
+    </div>
+    
+    <div id="peru" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇵🇪</div>
+            <h2>Peru Office</h2>
+            <p><strong>Location:</strong> Lima, Americas | <strong>Tier:</strong> 2 | <strong>Manager:</strong> Daniel Rodrigue</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 30</p>
+        </div>
+    </div>
+    
+    <div id="uk" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇬🇧</div>
+            <h2>United Kingdom Office</h2>
+            <p><strong>Location:</strong> London, Europe | <strong>Tier:</strong> 1</p>
+            <p><strong>Team:</strong> Raj Kumar (COO), Ajay Kawa (Global Business Development), Alia Taub (Chief People Officer)</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 4</p>
+        </div>
+    </div>
+    
+    <div id="bahrain" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇧🇭</div>
+            <h2>Bahrain Office</h2>
+            <p><strong>Location:</strong> Manama, Middle East | <strong>Tier:</strong> 1 | <strong>Manager:</strong> KK Menon</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 1</p>
+        </div>
+    </div>
+    
+    <div id="philippines" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇵🇭</div>
+            <h2>Philippines Office</h2>
+            <p><strong>Location:</strong> Manila, Asia Pacific | <strong>Tier:</strong> 1 | <strong>Manager:</strong> Maricar Manalo Chao</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 17</p>
+        </div>
+    </div>
+    
+    <div id="france" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇫🇷</div>
+            <h2>France Office</h2>
+            <p><strong>Location:</strong> Paris, Europe | <strong>Tier:</strong> 1 | <strong>Managers:</strong> Paolina Zunino & Renaud Lenne</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 5</p>
+        </div>
+    </div>
+    
+    <div id="poland" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇵🇱</div>
+            <h2>Poland Office</h2>
+            <p><strong>Location:</strong> Europe | <strong>Tier:</strong> 1 | <strong>Manager:</strong> Krzysztof Jamruszkiewicz</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 1</p>
+        </div>
+    </div>
+    
+    <div id="czech" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇨🇿</div>
+            <h2>Czech Republic Office</h2>
+            <p><strong>Location:</strong> Prague, Europe | <strong>Tier:</strong> 1 | <strong>Manager:</strong> Marta Zizkova</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 1</p>
+        </div>
+    </div>
+    
+    <div id="singapore" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇸🇬</div>
+            <h2>Singapore Office</h2>
+            <p><strong>Location:</strong> Asia Pacific | <strong>Tier:</strong> 1 | <strong>Manager:</strong> Maricar Manalo Chao</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 3</p>
+        </div>
+    </div>
+    
+    <div id="slovakia" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇸🇰</div>
+            <h2>Slovakia Office</h2>
+            <p><strong>Location:</strong> Europe | <strong>Tier:</strong> 1 | <strong>Manager:</strong> Adonis</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 1</p>
+        </div>
+    </div>
+    
+    <div id="bulgaria" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇧🇬</div>
+            <h2>Bulgaria Office</h2>
+            <p><strong>Location:</strong> Sofia, Europe | <strong>Tier:</strong> 1 | <strong>Manager:</strong> Adonis</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: —</p>
+        </div>
+    </div>
+    
+    <div id="usa" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇺🇸</div>
+            <h2>USA Office</h2>
+            <p><strong>Location:</strong> Americas</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+        </div>
+    </div>
+    
+    <div id="india" class="tab-content">
+        <div class="pending-message">
+            <div class="pending-icon">🇮🇳</div>
+            <h2>India HQ</h2>
+            <p><strong>Location:</strong> South Asia | <strong>Tier:</strong> 1 | <strong>Manager:</strong> Lalitha P</p>
+            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
+            <p style="margin-top: 10px;">Staff: 698</p>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+    function showTab(tabId) {
+        // Hide all tab contents
+        const contents = document.querySelectorAll('.tab-content');
+        contents.forEach(content => {
+            content.classList.remove('active');
         });
-    </script>
+        
+        // Remove active class from all buttons
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Show selected tab
+        document.getElementById(tabId).classList.add('active');
+        
+        // Add active class to clicked button
+        event.target.closest('.tab-btn').classList.add('active');
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
 
 </body>
 </html>
