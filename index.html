@@ -520,8 +520,8 @@
             <span class="flag">🇹🇭</span> Thailand
             <span class="status-dot"></span>
         </button>
-        <button class="tab-btn pending" onclick="showTab('argentina')">
-            <span class="flag">🇦🇷</span> Argentina
+        <button class="tab-btn" onclick="showTab('argentina')">
+            <span class="flag">🇦🇷</span> Latin America
             <span class="status-dot"></span>
         </button>
         <button class="tab-btn pending" onclick="showTab('italy')">
@@ -590,19 +590,19 @@
     <div id="summary" class="tab-content active">
         <div class="summary-grid">
             <div class="stat-card response-rate">
-                <span class="stat-number">4/21</span>
+                <span class="stat-number">5/21</span>
                 <span class="stat-label">Response Rate</span>
             </div>
             <div class="stat-card">
-                <span class="stat-number">19%</span>
+                <span class="stat-number">24%</span>
                 <span class="stat-label">Offices Reported</span>
             </div>
             <div class="stat-card">
-                <span class="stat-number">5</span>
+                <span class="stat-number">6</span>
                 <span class="stat-label">Countries</span>
             </div>
             <div class="stat-card">
-                <span class="stat-number">6</span>
+                <span class="stat-number">7</span>
                 <span class="stat-label">Contributors</span>
             </div>
         </div>
@@ -741,16 +741,21 @@
                 </div>
             </div>
             
-            <div class="office-card pending" onclick="showTab('argentina')">
+            <div class="office-card" onclick="showTab('argentina')">
                 <div class="office-card-header">
-                    <div class="office-name"><span class="flag">🇦🇷</span> Argentina</div>
-                    <span class="office-status pending">Pending</span>
+                    <div class="office-name"><span class="flag">🇦🇷</span> Latin America</div>
+                    <span class="office-status received">Received</span>
                 </div>
                 <div class="office-meta">📍 Buenos Aires · Americas · Tier 2</div>
-                <div class="office-manager">👤 Maria Noelia Bonvin (6 staff)</div>
+                <div class="office-manager">👤 María Noelia Bonvin · Constanza Gutierrez</div>
                 <div class="key-points">
-                    <h4>Status</h4>
-                    <p style="color: #ed8936; font-style: italic;">Awaiting response...</p>
+                    <h4>Key Points</h4>
+                    <ul>
+                        <li>Q1 Outbound: USD 44,822 | Inbound: USD 39,576</li>
+                        <li>15 active outbound agencies; Peru partnership onboarding</li>
+                        <li>Noelia dual role: LATAM + Global Head of Product & Platform</li>
+                        <li>Strategy alignment with Vinay & Raj requested</li>
+                    </ul>
                 </div>
             </div>
             
@@ -1583,13 +1588,174 @@
     </div>
     
     <div id="argentina" class="tab-content">
-        <div class="pending-message">
-            <div class="pending-icon">🇦🇷</div>
-            <h2>Argentina Office</h2>
-            <p><strong>Location:</strong> Buenos Aires, Americas | <strong>Tier:</strong> 2 | <strong>Manager:</strong> Maria Noelia Bonvin</p>
-            <p style="margin-top: 20px; font-size: 14pt;">⏳ Awaiting response from office...</p>
-            <p style="margin-top: 10px;">Staff: 6</p>
+        
+        <div class="office-header-large">
+            <h2>🇦🇷 Latin America Region</h2>
+            <div class="office-location">📍 Buenos Aires, Argentina &nbsp;|&nbsp; Americas &nbsp;|&nbsp; Tier 2</div>
         </div>
+
+        <div class="submitted-by-box">
+            <div>
+                <strong>Submitted by:</strong> María Noelia Bonvin &nbsp;|&nbsp; <em>Global Head of Product &amp; Platform / LATAM Regional Lead</em>
+            </div>
+            <div style="color: #718096; font-size: 9pt;">March 2026</div>
+        </div>
+
+        <!-- Q1 Performance -->
+        <div class="section performance">
+            <div class="section-header">
+                <div class="section-icon" style="background:#38a169;">📊</div>
+                <h3>Q1 Performance (1 Jan – 15 Mar 2026)</h3>
+            </div>
+            <div class="section-content">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Metric</th><th>Value</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Outbound Revenue</td><td><strong>USD 44,822</strong></td></tr>
+                        <tr><td>Active Agencies (Outbound)</td><td>15</td></tr>
+                        <tr><td>Inbound Revenue</td><td><strong>USD 39,576</strong></td></tr>
+                        <tr><td>New Agents Onboarded in Q1</td><td>1</td></tr>
+                        <tr><td>Main Outbound Source Markets</td><td>Brazil, Peru, Chile, Ecuador</td></tr>
+                        <tr><td>Main Inbound Source Markets</td><td>UAE, Australia, India</td></tr>
+                    </tbody>
+                </table>
+                <p style="margin-top:12px;"><strong>Key initiatives progressed:</strong></p>
+                <ul>
+                    <li>Support for TAG expansion with Europe product</li>
+                    <li>Platform V2 development (US market)</li>
+                    <li>Travel Credits plan</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Regional Background & Structure -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background:#1e3a5f;">🌎</div>
+                <h3>Regional Background</h3>
+            </div>
+            <div class="section-content">
+                <p>Until June 2025, the LATAM team comprised <strong>10 people</strong> across six countries:</p>
+                <table class="data-table" style="margin-top:10px;">
+                    <thead>
+                        <tr><th>Country</th><th>Headcount</th><th>Role</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>🇧🇷 Brazil</td><td>2</td><td>1 full-time + 1 part-time sales</td></tr>
+                        <tr><td>🇨🇱 Chile</td><td>2</td><td>Full-time sales representatives</td></tr>
+                        <tr><td>🇵🇪 Peru</td><td>2</td><td>Full-time sales representatives</td></tr>
+                        <tr><td>🇪🇨 Ecuador</td><td>2</td><td>Full-time sales representatives</td></tr>
+                        <tr><td>🇲🇽 Mexico</td><td>1</td><td>Full-time sales representative</td></tr>
+                        <tr><td>🇦🇷 Argentina</td><td>1</td><td>Operations, Sales, Contracting, Product &amp; Admin</td></tr>
+                    </tbody>
+                </table>
+                <p style="margin-top:12px;">Each local team managed both <strong>outbound</strong> (agent recruitment, pre/post-sales, product development) and <strong>inbound</strong> (quotes, contracting, on-the-ground operations). During this period, the region onboarded <strong>1,000+ travel agencies</strong> and generated regular business from approximately <strong>300 agencies</strong>.</p>
+                <p style="margin-top:10px;">A key operational constraint was operating without a local legal entity in each country, relying on a cross-border payment gateway.</p>
+            </div>
+        </div>
+
+        <!-- Current Structure -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background:#805ad5;">👥</div>
+                <h3>Current Team Structure (Since June 2025)</h3>
+            </div>
+            <div class="section-content">
+                <p>The regional team was reduced to two people based in Argentina, plus an active wholesale partnership in Peru:</p>
+                <br>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Person</th><th>Location</th><th>Responsibilities</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>María Noelia Bonvin</strong></td>
+                            <td>Argentina</td>
+                            <td>Global Head of Product &amp; Platform (US &amp; AU markets); LATAM sales, quotations, and agency relationships</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Constanza Gutierrez</strong></td>
+                            <td>Argentina</td>
+                            <td>TAG product support; operational supervision; sales, operations, delivery, product and contracting across South America; inbound travel (North &amp; South America)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Vacacionate (Partner)</strong></td>
+                            <td>Peru</td>
+                            <td>Local wholesaler with 30+ years in market; platform onboarding in progress; mutual destination content sharing</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Challenges -->
+        <div class="section challenges">
+            <div class="section-header">
+                <div class="section-icon">⚠️</div>
+                <h3>Challenges &amp; Constraints</h3>
+            </div>
+            <div class="section-content">
+                <ul>
+                    <li>Without regular in-person visits, networking events, and local marketing, keeping agencies consistently active is significantly harder</li>
+                    <li>Outsourced marketing team (social media, website, email, promotions) is no longer in place</li>
+                    <li>No local legal entities in LATAM countries — cross-border payment gateway remains the operating model</li>
+                    <li>Peru partnership (Vacacionate) has pending platform blockers before full operation — tracked at: <a href="https://docs.google.com/spreadsheets/d/1qoUBHZIEtlsy-iRBlcwVwfvVlbBhaGVF/edit" target="_blank" style="color:#3182ce;">Pending Items Tracker</a></li>
+                    <li>LATAM remains smaller in scale compared to markets like Australia, India or the US, which affects platform development prioritisation</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Peru Partnership -->
+        <div class="section plans">
+            <div class="section-header">
+                <div class="section-icon">🤝</div>
+                <h3>Peru Partnership — Vacacionate</h3>
+            </div>
+            <div class="section-content">
+                <p>A distribution partnership has been established with <strong>Vacacionate</strong>, a Peruvian wholesaler operating for 30+ years. The agreement structure:</p>
+                <ul style="margin-top:10px;">
+                    <li>Vacacionate adopts the ORN/TripFactory platform for their sales</li>
+                    <li>They purchase European and Asian destinations where ORN has stronger presence and contracts</li>
+                    <li>ORN integrates their contracts for the Americas (USA, Caribbean, South America) where Vacacionate has stronger negotiating position</li>
+                </ul>
+                <p style="margin-top:12px;">The proposed business plan for Peru is available here (pending approval): <a href="https://www.canva.com/design/DAHC3bgctmY/5KTjz895RRrwZj09aNXUHw/view" target="_blank" style="color:#3182ce;">Peru Business Plan →</a></p>
+            </div>
+        </div>
+
+        <!-- Strategic Outlook -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background:#3182ce;">🔭</div>
+                <h3>Strategic Outlook &amp; Requests</h3>
+            </div>
+            <div class="section-content">
+                <p>The strategic decision taken in mid-2025 was to <strong>wait for the new AI-powered platform</strong> before re-entering the market more strongly and with a more scalable structure. Peru represents a meaningful entry point back into the region.</p>
+                <p style="margin-top:10px;">In parallel, the team has been exploring <strong>receptive tourism in the Americas</strong> (USA and South America) for source markets such as India and the Philippines — an opportunity with strong potential for further development.</p>
+                <p style="margin-top:10px;"><strong>Latin America remains a highly fragmented market with strong long-term potential</strong>, particularly through strategic partnerships and scalable platform adoption.</p>
+                <p style="margin-top:15px; padding: 15px; background:#ebf8ff; border-left:4px solid #3182ce; border-radius:4px;">
+                    <strong>📌 Action Requested:</strong> Noelia is requesting alignment with Vinay and Raj on <strong>KRAs, KPIs, priorities and overall strategy</strong> for LATAM development — to define the scope of work and establish clear timelines.
+                </p>
+            </div>
+        </div>
+
+        <!-- Noelia's Dual Role -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background:#718096;">🧩</div>
+                <h3>Noelia's Additional Role — Global Head of Product &amp; Platform</h3>
+            </div>
+            <div class="section-content">
+                <p>Since September 2025, alongside LATAM responsibilities, Noelia has been serving as <strong>Global Head of Product &amp; Platform</strong>, focusing on:</p>
+                <ul>
+                    <li>Development of the new platform version for the US market (V2)</li>
+                    <li>Strategic initiatives: PBO, GIT Automation, ORN – The Light That Guides, Travel Credits</li>
+                    <li>Supporting US partner TAG in expanding destinations (particularly Europe) — including collaboration with the Europe Product team on contracting, integrations, product availability, and TAG system adoption</li>
+                </ul>
+            </div>
+        </div>
+
     </div>
     
     <div id="italy" class="tab-content">
